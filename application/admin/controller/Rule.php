@@ -90,9 +90,10 @@ class Rule extends Base{
      * 添加用户组
      */
     public function add_group(){
-        $data=I('post.');
+        $data=input('post.');
         unset($data['id']);
-        $result=D('AuthGroup')->addData($data);
+        $m = new AuthGroup ;
+        $result= $m->data($data)->save();
         if ($result) {
             $this->success('添加成功',url('Admin/Rule/group'));
         }else{
