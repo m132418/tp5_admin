@@ -24,17 +24,18 @@ class AuthGroupAccess extends BaseModel{
 	 */
 	
 	public function getAllData(){
+	    $prefix = config('database.prefix');
 	    $query_sql = 
 	    'SELECT'.
-	        '	bjyadmin_users.id,'.
-	        '	bjyadmin_users.username,'.
-	        '	bjyadmin_users.email,'.
-	        '	bjyadmin_auth_group_access.group_id,'.
-	        '	bjyadmin_auth_group.title'.
+	        '	'.$prefix.'users.id,'.
+	        '	'.$prefix.'users.username,'.
+	        '	'.$prefix.'users.email,'.
+	        '	'.$prefix.'auth_group_access.group_id,'.
+	        '	'.$prefix.'auth_group.title'.
 	        ' FROM'.
-	        '	bjyadmin_users'.
-	        ' RIGHT JOIN bjyadmin_auth_group_access ON bjyadmin_auth_group_access.uid = bjyadmin_users.id'.
-	        ' LEFT JOIN bjyadmin_auth_group ON bjyadmin_auth_group_access.group_id = bjyadmin_auth_group.id '
+	        '	'.$prefix.'users'.
+	        ' RIGHT JOIN '.$prefix.'auth_group_access ON '.$prefix.'auth_group_access.uid = '.$prefix.'users.id'.
+	        ' LEFT JOIN '.$prefix.'auth_group ON '.$prefix.'auth_group_access.group_id = '.$prefix.'auth_group.id '
 	    ;
 	
 	  $data =  Db::query($query_sql);
